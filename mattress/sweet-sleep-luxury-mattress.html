@@ -24,24 +24,25 @@
     />
 
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org/",
-        "@type": "Product",
-        "name": "Sweet Sleep Luxury Mattress",
-        "image": "https://furnfabinterio.com/matress-main-images/sweet-sleep-luxury-mattress.png",
-        "description": "In a world where quality sleep is paramount, Furnfabinterio redefines rest with its Sweet Sleep Luxury Mattress, a masterpiece designed to blend opulence, innovation, and affordability. Crafted for those who seek a luxury sleep mattress that elevates their nightly routine, this product stands as a testament to superior craftsmanship and cutting-edge sleep technology.",
-        "brand": {
-          "@type": "Brand",
-          "name": "Furnfabinterio"
-        },
-        "offers": {
-          "@type": "AggregateOffer",
-          "url": "https://furnfabinterio.com/mattress/sweet-sleep-luxury-mattress.html",
-          "priceCurrency": "INR",
-          "lowPrice": "7499"
-        }
-      }
-    </script>
+{
+  "@context": "https://schema.org/", 
+  "@type": "Product", 
+  "name": "Sweet Sleep Luxury Mattress",
+  "image": "https://furnfabinterio.com/matress-main-images/sweet-sleep-luxury-mattress.png",
+  "description": "In today’s fast-paced world, quality sleep isn’t a luxury; it’s a necessity. And nothing supports restful, deep sleep better than the Sweet Sleep Luxury Mattress by Furnfab. Thoughtfully designed with premium materials and crafted for both comfort and support, this mattress is your answer to luxury sleep at home. Whether you're seeking a luxury queen mattress for yourself or the best luxury mattress in India for your family, Sweet Sleep checks every box.",
+  "brand": {
+    "@type": "Brand",
+    "name": "Furnfabinterio"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "url": "https://furnfabinterio.com/mattress/sweet-sleep-luxury-mattress.html",
+    "priceCurrency": "INR",
+    "lowPrice": "11199"
+  }
+}
+</script>
+
   </head>
   <body>
     <nav class="navbar">
@@ -125,7 +126,7 @@
 
       <div class="product-right">
         <h1>Sweet Sleep Luxury Mattress</h1>
-        <p class="price">₹7,499.00 </p>
+        <p class="price">₹11,199 </p>
         <p><strong>Product ID:</strong> FFIN006</p>
         <p class="discount">15% off – (Inc. of all taxes)</p>
 
@@ -612,9 +613,9 @@ If you're searching for a luxury queen mattress, a luxury king size mattress, or
       const sizeWrapper = thicknessSelect.closest("div"); // common parent wrapper
 
       const sizeMap = {
-        Single: { price: 6999, size: '36" x 72"' },
+        Single: { price: 9199, size: '36" x 72"' },
         Queen: { price: 19899, size: '60" x 78"' },
-        King: { price: 20799, size: '72" x 78"' },
+        King: { price: 23799, size: '72" x 78"' },
       };
 
       function removeOldSizeFields() {
@@ -670,7 +671,7 @@ If you're searching for a luxury queen mattress, a luxury king size mattress, or
           return;
         }
         const sqft = (len * brd) / 144;
-        const price = Math.round(sqft * 720);
+        const price = Math.round(sqft * 460);
         priceDisplay.textContent = `₹${price.toLocaleString()}.00`;
         finalSize.textContent = `${len}" x ${brd}"`;
       }
