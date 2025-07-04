@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Checkout</title>
+    <link rel="stylesheet" href="buy-now.css" />
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  </head>
+  <body>
+    <section class="checkout-wrapper">
+      <h1>Checkout</h1>
+      <div class="checkout-container">
+        <form id="orderForm">
+          <h2>Billing details</h2>
+          <input required type="text" placeholder="First Name *" />
+          <input required type="text" placeholder="Last Name *" />
+          <input required type="text" placeholder="Street Address *" />
+          <input required type="text" placeholder="Town / City *" />
+          <input required type="text" placeholder="State *" />
+          <input required type="text" placeholder="Pin Code *" />
+          <input required type="tel" placeholder="Phone *" />
+          <input type="email" placeholder="Email Address (Optional)" />
+          <button type="submit">Place Order</button>
+        </form>
+
+        <aside>
+          <h3>Your order</h3>
+          <p id="orderTotal">Total: ₹0</p>
+          <h3>Choose Payment Method:</h3>
+          <label
+            ><input type="radio" name="payment" value="cod" checked /> Cash on
+            Delivery</label
+          ><br />
+          <label
+            ><input type="radio" name="payment" value="online" /> Pay Online
+            (Razorpay)</label
+          >
+          <div class="nav-btns">
+            <a href="cart.html" class="btn">⬅️ Back to Cart</a>
+            <a href="index.html" class="btn black">🛒 Back to Shopping</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const total = cart.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+      );
+      document.getElementById("orderTotal").innerText = `Total: ₹${total}`;
+
+      document
+        .getElementById("orderForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const paymentMethod = document.querySelector(
+            'input[name="payment"]:checked'
+          ).value;
+
+          if (paymentMethod === "cod") {
+            alert("COD Order Placed Successfully!");
+            localStorage.removeItem("cart");
+            window.location.href = "index.html";
+          } else {
+            const options = {
+              key: "rzp_live_pEM4Xhug19ZTH2", // Replace with your Razorpay Key ID
+              amount: total * 100, // Razorpay expects amount in paise
+              currency: "INR",
+              name: "Furnfab Interio",
+              description: "Order Payment",
+              image: "https://furnfabinterio.com/images/logo.png",
+              handler: function (response) {
+                alert(
+                  "Payment Successful. Razorpay ID: " +
+                    response.razorpay_payment_id
+                );
+                localStorage.removeItem("cart");
+                window.location.href = "index.html";
+              },
+              prefill: {
+                name: document.querySelector(
+                  "input[placeholder='First Name *']"
+                ).value,
+                email:
+                  document.querySelector("input[type='email']").value ||
+                  "customer@example.com",
+                contact: document.querySelector("input[placeholder='Phone *']")
+                  .value,
+              },
+              theme: {
+                color: "#000000",
+              },
+            };
+
+            const rzp = new Razorpay(options);
+            rzp.open();
+          }
+        });
+    </script>
+  </body>
+</html>

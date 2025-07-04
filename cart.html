@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cart</title>
+    <link rel="stylesheet" href="cart.css" />
+  </head>
+  <body>
+    <section class="cart-wrapper">
+      <h1>Cart</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Remove</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody id="cart-body"></tbody>
+      </table>
+      <div class="coupon">
+        <input type="text" placeholder="Coupon code" />
+        <button>Apply coupon</button>
+      </div>
+      <div class="cart-buttons">
+        <a href="index.html" class="btn dark">🔄 Resume Shopping</a>
+        <button onclick="updateCart()">Update cart</button>
+        <a href="buy-now.html" class="btn black">Proceed to checkout</a>
+      </div>
+    </section>
+
+    <script>
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      function renderCart() {
+        const tbody = document.getElementById("cart-body");
+        tbody.innerHTML = "";
+        cart.forEach((item, index) => {
+          tbody.innerHTML += `
+          <tr>
+            <td><button onclick="removeItem(${index})">🗑️</button></td>
+            <td>${item.name}</td>
+            <td>₹${item.price}</td>
+            <td><input type="number" value="${
+              item.quantity
+            }" onchange="changeQty(${index}, this.value)" /></td>
+            <td>₹${item.price * item.quantity}</td>
+          </tr>`;
+        });
+      }
+
+      function removeItem(index) {
+        cart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
+      }
+
+      function changeQty(index, qty) {
+        cart[index].quantity = parseInt(qty);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
+      }
+
+      function updateCart() {
+        alert("Cart updated!");
+      }
+
+      window.onload = renderCart;
+    </script>
+  </body>
+</html>
